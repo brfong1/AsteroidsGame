@@ -7,9 +7,17 @@ public void draw()
 {
   //your code here
 }
-class SpaceShip //extends Floater 
+class SpaceShip extends Floater 
 {   
-    //your code here
+    SpaceShip()
+    {
+      corners = 4;
+      int[] xS = {-8,16,-8,-2};
+      int[] yS = {-8,0,8,0}; 
+      xCorners = xS;
+      yCorners = yS;
+      
+    }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -32,8 +40,8 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   abstract public double getPointDirection(); 
 
   //Accelerates the floater in the direction it is pointing (myPointDirection)   
-  public void accelerate (double dAmount)   
-  {          
+  public void accelerate (double dAmount)
+    {          
     //convert the current direction the floater is pointing to radians    
     double dRadians =myPointDirection*(Math.PI/180);     
     //change coordinates of direction of travel    
