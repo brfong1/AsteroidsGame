@@ -1,14 +1,28 @@
-//your variable declarations here
+SpaceShip bob = new SpaceShip();
 public void setup() 
 {
-  //your code here
+  size(600,600);
 }
 public void draw() 
 {
-  //your code here
+  background(0);
+  bob.show();
+  bob.move();
+}
+public void keypressed()
+{
+  if(key == 'w')
+  {
+    bob.accelerate(5.0);
+  }
 }
 class SpaceShip extends Floater 
 {   
+  // SpaceShip(int x,int y)
+  // {
+  //   myX = x;
+  //   myY = y;
+  // }
     SpaceShip()
     {
       corners = 4;
@@ -16,8 +30,17 @@ class SpaceShip extends Floater
       int[] yS = {-8,0,8,0}; 
       xCorners = xS;
       yCorners = yS;
-      
     }
+    public void setX(int x){myCenterX = x;}
+    public void getX(){return x;}
+    public void setY(int y){myCenterY = y;}
+    public void getY(){return y;}
+    public void setDirectionX(double x){myDirection = x;}
+    public void getDirectionX(){return x;}
+    public void setDirectionY(double y){myDirection = y;}
+    public void getDirectionY(){return y;}
+    public void setPointDirection(int d);{myDegree = d;}
+    public void getPointDirection(){return d;}
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -77,7 +100,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
       myCenterY = height;    
     }   
   }   
-  public void show ()  //Draws the floater at the current position  
+  public void show ()  /*Draws the floater at the current position  */
   {             
     fill(myColor);   
     stroke(myColor);    
@@ -95,4 +118,3 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
-
