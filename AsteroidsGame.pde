@@ -18,34 +18,56 @@ public void draw()
   bob.show();
   bob.move();
 }
-public void keypressed()
+public void keyPressed()
 {
-  // if(key == 'w')
-  // {
-  //   bob.accelerate(5.0);
-  // }
+  int degRot = 5;
+  if(key == 'w')
+  {
+    bob.accelerate(0.5);
+    // System.out.println("w");
+  }
+  if( key == 's')
+  {
+    bob.accelerate(0.5);
+    // System.out.println("s");
+  }
+  if(key == 'a')
+  {
+    // System.out.println("a");
+    bob.rotate(-degRot);
+  }
+  if(key == 'd')
+  {
+    // System.out.println("d");
+    bob.rotate(degRot);
+  }
+  if(key == 'f')
+  {
+    bob.accelerate(-0.1);
+  }
 }
 class Star
 {
   private int starX, starY;
   Star()
   {
-    starX = (int)(Math.random()*500);
-    starY = (int)(Math.random()*500);
+    starX = (int)(Math.random()*600);
+    starY = (int)(Math.random()*600);
   }
   void show()
   {
     noStroke();
-    ellipse(5,5,starX,starY);
+    fill(225);
+    ellipse(starX,starY, 5,5);
   }
 }
 class SpaceShip extends Floater 
 {   
-  // SpaceShip(int x,int y)
-  // {
-  //   myX = x;
-  //   myY = y;
-  // }
+  SpaceShip(int x,int y)
+  {
+    myCenterX = x;
+    myCenterY = y;
+  }
     SpaceShip()
     {
       corners = 4;
@@ -53,6 +75,12 @@ class SpaceShip extends Floater
       int[] yS = {-8,0,8,0}; 
       xCorners = xS;
       yCorners = yS;
+      myCenterX = 300;
+      myCenterY = 300;
+      myColor = 255;
+      myPointDirection = 270; //degrees
+      myDirectionX = 0; //leave at zero
+      myDirectionY = 0;
     }
     public void setX(int x){myCenterX = x;}
     public int getX(){return (int)myCenterX;}
@@ -64,6 +92,7 @@ class SpaceShip extends Floater
     public double getDirectionY(){return myDirectionY;}
     public void setPointDirection(int degrees){myPointDirection = degrees;}
     public double getPointDirection(){return myPointDirection;}
+
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
