@@ -25,7 +25,7 @@ public void keyPressed()
   if(key == 'w') 
   {
     bob.accelerate(0.5);
-    System.out.println("ಠ_ಠ");
+    // System.out.println("ಠ_ಠ");
   }
   if( key == 's')
   {
@@ -169,5 +169,9 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
       vertex(xRotatedTranslated,yRotatedTranslated);    
     }   
     endShape(CLOSE);  
+   /* if(keyPressed == TRUE && key == 'w')
+    {
+      
+    }*/
   }   
 } 
