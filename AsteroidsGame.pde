@@ -2,6 +2,7 @@ SpaceShip bob = new SpaceShip();
 Star[] sky = new Star[200];
 public void setup() 
 {
+  frameRate(60);
   size(600,600);
   for(int i=0;i<sky.length;i++)
   {
@@ -20,15 +21,15 @@ public void draw()
 }
 public void keyPressed()
 {
-  int degRot = 5;
-  if(key == 'w')
+  int degRot = 10;  //can change
+  if(key == 'w') 
   {
     bob.accelerate(0.5);
-    // System.out.println("w");
+    System.out.println("ಠ_ಠ");
   }
   if( key == 's')
   {
-    bob.accelerate(0.5);
+    bob.accelerate(-0.5);
     // System.out.println("s");
   }
   if(key == 'a')
