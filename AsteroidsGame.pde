@@ -42,9 +42,9 @@ public void keyPressed()
     // System.out.println("d");
     bob.rotate(degRot);
   }
-  if(key == 'f')
+  if(key == ' ')
   {
-    bob.accelerate(-0.1);
+    bob.accelerate(-1.0);
   }
 }
 class Star
@@ -169,9 +169,9 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
       vertex(xRotatedTranslated,yRotatedTranslated);    
     }   
     endShape(CLOSE);  
-   /* if(keyPressed == TRUE && key == 'w')
-    {
+    // if(keyPressed == TRUE && key == 'w')
+    // {
       
-    }*/
+    // }
   }   
 } 
