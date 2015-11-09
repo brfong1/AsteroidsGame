@@ -1,5 +1,6 @@
 SpaceShip bob = new SpaceShip();
 Star[] sky = new Star[200];
+Asteroid charloot = new Asteroid();
 public void setup() 
 {
   frameRate(60);
@@ -24,12 +25,12 @@ public void keyPressed()
   int degRot = 10;  //can change
   if(key == 'w') 
   {
-    bob.accelerate(0.5);
+    bob.accelerate(0.2);
     // System.out.println("ಠ_ಠ");
   }
   if( key == 's')
   {
-    bob.accelerate(-0.5);
+    bob.accelerate(-0.2);
     // System.out.println("s");
   }
   if(key == 'a')
@@ -44,7 +45,15 @@ public void keyPressed()
   }
   if(key == ' ')
   {
-    bob.accelerate(-1.0);
+      bob.setDirectionX(0);
+      bob.setDirectionY(0);
+  }
+  if (key == 'f')
+  {
+    bob.setX((int)(Math.random()*600));
+    bob.setY((int)(Math.random()*600));
+    bob.setDirectionX(0);
+    bob.setDirectionY(0);
   }
 }
 class Star
@@ -94,6 +103,38 @@ class SpaceShip extends Floater
     public void setPointDirection(int degrees){myPointDirection = degrees;}
     public double getPointDirection(){return myPointDirection;}
 
+}
+class Asteroid extends Floater 
+{
+  Asteroid(int x, int y)
+  {
+    myCenterX = x;
+    myCenterY = y;
+  }
+Asteroid()
+    {
+      corners = 4;
+      int[] xS = {-8,16,-8,-2}; //change
+      int[] yS = {-8,0,8,0};  //change
+      xCorners = xS;
+      yCorners = yS;
+      myCenterX = (int)(Math.random()+600); 
+      myCenterY = (int)(Math.random()+600);
+      myColor = 255;
+      myPointDirection = 270; //degrees
+      myDirectionX = 0; //leave at zero
+      myDirectionY = 0;
+    }
+    public void setX(int x){myCenterX = x;}
+    public int getX(){return (int)myCenterX;}
+    public void setY(int y){myCenterY = y;}
+    public int getY(){return (int)myCenterY;}
+    public void setDirectionX(double x){myDirectionX = x;}
+    public double getDirectionX(){return myDirectionX;}
+    public void setDirectionY(double y){myDirectionY = y;}
+    public double getDirectionY(){return myDirectionY;}
+    public void setPointDirection(int degrees){myPointDirection = degrees;}
+    public double getPointDirection(){return myPointDirection;}
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
