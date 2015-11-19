@@ -1,6 +1,6 @@
 SpaceShip bob = new SpaceShip();
 Star[] sky = new Star[200];
-Asteroid[] charloot = new Asteroid[10];
+Asteroid[] charloot = new Asteroid[1];
 public void setup() 
 {
   frameRate(60);
@@ -24,13 +24,15 @@ public void draw()
   // charloot[1].show();
   for(int i = 0; i < charloot.length; i++)
   {
+   // charloot[i].setX((int)((Math.random()*10 )+ 580));
+   // charloot[i].setY((int)((Math.random()*10 )+ 580));
    charloot[i].show();
    charloot[i].move();
   }
 }
 public void keyPressed()
 {
-  int degRot = 10;  //can change
+  int degRot = 20s;  //can change
   if(key == 'w') 
   {
     bob.accelerate(0.2);
@@ -51,7 +53,7 @@ public void keyPressed()
     // System.out.println("d");
     bob.rotate(degRot);
   }
-  if(key == ' ')
+  if(key == 'e')
   {
       bob.setDirectionX(0);
       bob.setDirectionY(0);
@@ -62,6 +64,11 @@ public void keyPressed()
     bob.setY((int)(Math.random()*600));
     bob.setDirectionX(0);
     bob.setDirectionY(0);
+  }
+  if (key == 'r')
+  {
+    bob.setX((int)(Math.random()*600));
+    bob.setY((int)(Math.random()*600));
   }
 }
 class Star
@@ -120,7 +127,7 @@ class Asteroid extends Floater
     myCenterY = y;
   }
 
-  int rotSpeed;
+  float rotSpeed;
 public Asteroid()
     {
       
@@ -135,7 +142,7 @@ public Asteroid()
       myPointDirection = 270; //degrees
       myDirectionX = 0; //leave at zero
       myDirectionY = 0;
-      rotSpeed = 1; //what is this
+      rotSpeed = 5; //what is this
     }
     public void setX(int x){myCenterX = x;}
     public int getX(){return (int)myCenterX;}
@@ -154,7 +161,8 @@ public Asteroid()
        super.move();
        setDirectionX(Math.random());
        setDirectionY(Math.random());
-       setPointDirection((int)(Math.random()*360));
+       // setX((int)((Math.random()*10 )+ 580));
+       // setY((int)((Math.random()*10 )+ 580)); 
     }
 
 }
@@ -187,7 +195,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));       
   }   
-  public void rotate (int nDegreesOfRotation)   
+  public void rotate (float nDegreesOfRotation)   
   {     
     //rotates the floater by a given number of degrees    
     myPointDirection+=nDegreesOfRotation;   
@@ -218,7 +226,8 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }   
   public void show ()  /*Draws the floater at the current position  */
   {             
-    fill(myColor);   
+    // fill(myColor);  
+    noFill(); 
     stroke(myColor);    
     //convert degrees to radians for sin and cos         
     double dRadians = myPointDirection*(Math.PI/180);                 
