@@ -69,6 +69,14 @@ public void keyPressed()
   {
     bob.setX((int)(Math.random()*600));
     bob.setY((int)(Math.random()*600));
+    for(int i = 0; i <charloot.length; i++)
+    {
+    if(bob.getX() == charloot[i].getX() && bob.getY() == charloot[i].getY())
+    {
+     bob.setX((int)(Math.random()*600));
+     bob.setY((int)(Math.random()*600));
+    }
+  }
   }
 }
 class Star
@@ -224,7 +232,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
       myCenterY = height;    
     }   
   }   
-  public void show ()  /*Draws the floater at the current position  */
+  public void show ()  /*Draws the floater at the current position */
   {             
     // fill(myColor);  
     fill(0); 
