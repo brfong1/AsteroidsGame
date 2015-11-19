@@ -1,6 +1,6 @@
 SpaceShip bob = new SpaceShip();
 Star[] sky = new Star[200];
-Asteroid[] charloot = new Asteroid[1];
+Asteroid[] charloot = new Asteroid[10];
 public void setup() 
 {
   frameRate(60);
@@ -32,7 +32,7 @@ public void draw()
 }
 public void keyPressed()
 {
-  int degRot = 20s;  //can change
+  int degRot = 20;  //can change
   if(key == 'w') 
   {
     bob.accelerate(0.2);
@@ -121,13 +121,13 @@ class SpaceShip extends Floater
 }
 class Asteroid extends Floater 
 {
-  Asteroid(int x, int y)
-  {
-    myCenterX = x;
-    myCenterY = y;
-  }
+  // Asteroid(int x, int y)
+  // {
+  //   myCenterX = x;
+  //   myCenterY = y;
+  // }
 
-  float rotSpeed;
+private float rotSpeed;
 public Asteroid()
     {
       
@@ -136,10 +136,10 @@ public Asteroid()
       int[] yS = {-8,-8,0,10,8,0}; 
       xCorners = xS;
       yCorners = yS;
-      myCenterX = (int)((Math.random()*10 )+ 580); 
-      myCenterY = (int)((Math.random()*10 )+ 580);
+      myCenterX = ((Math.random()*600));/*10)+ 580); */
+      myCenterY = ((Math.random()*600));/*10)+ 580);*/
       myColor = 255;
-      myPointDirection = 270; //degrees
+      myPointDirection = (int)(Math.random()*360); //degrees
       myDirectionX = 0; //leave at zero
       myDirectionY = 0;
       rotSpeed = 5; //what is this
@@ -227,7 +227,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void show ()  /*Draws the floater at the current position  */
   {             
     // fill(myColor);  
-    noFill(); 
+    fill(0); 
     stroke(myColor);    
     //convert degrees to radians for sin and cos         
     double dRadians = myPointDirection*(Math.PI/180);                 
