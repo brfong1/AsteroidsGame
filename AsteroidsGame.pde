@@ -1,6 +1,8 @@
 SpaceShip bob = new SpaceShip();
 Star[] sky = new Star[200];
 Asteroid[] charloot = new Asteroid[10];
+// ArrayList <Asteroid> charloot;
+// charloot = new ArrayList <Asteroid>[10];
 public void setup() 
 {
   frameRate(60);
@@ -77,7 +79,7 @@ public void keyPressed()
      bob.setY((int)(Math.random()*600));
     }
   }
-  }
+ }
 }
 class Star
 {
