@@ -1,18 +1,18 @@
 SpaceShip bob = new SpaceShip();
 Star[] sky = new Star[200];
-Asteroid[] charloot = new Asteroid[10];
-// ArrayList <Asteroid> charloot;
-// charloot = new ArrayList <Asteroid>[10];
+// Asteroid[] charloot = new Asteroid[10];
+ArrayList <Asteroid> charloot;
 public void setup() 
 {
-  frameRate(60);
   size(600,600);
+  charloot = new ArrayList <Asteroid>();
+  frameRate(60);
   for(int i=0;i<sky.length;i++)
   {
     sky[i] = new Star();
   }
-  for(int j = 0; j < charloot.length; j++)
-    charloot[j] = new Asteroid();
+  for(int j = 0; j < 10; j++)
+    charloot.add(new Asteroid());
 }
 public void draw() 
 {
@@ -24,13 +24,18 @@ public void draw()
   bob.show();
   bob.move();
   // charloot[1].show();
-  for(int i = 0; i < charloot.length; i++)
+  for(int i = 0; i < charloot.size(); i++)
   {
    // charloot[i].setX((int)((Math.random()*10 )+ 580));
    // charloot[i].setY((int)((Math.random()*10 )+ 580));
-   charloot[i].show();
-   charloot[i].move();
+   charloot.get(i).show();
+   charloot.get(i).move();
+   if(dist(charloot.get(i).getX(), charloot.get(i).getY(), bob.getX(), bob.getY()) <= 20)
+   {
+    charloot.remove(i);
+   }
   }
+
 }
 public void keyPressed()
 {
@@ -71,9 +76,9 @@ public void keyPressed()
   {
     bob.setX((int)(Math.random()*600));
     bob.setY((int)(Math.random()*600));
-    for(int i = 0; i <charloot.length; i++)
+    for(int i = 0; i <charloot.size(); i++)
     {
-    if(bob.getX() == charloot[i].getX() && bob.getY() == charloot[i].getY())
+    if(bob.getX() == charloot.get(i).getX() && bob.getY() == charloot.get(i).getY())
     {
      bob.setX((int)(Math.random()*600));
      bob.setY((int)(Math.random()*600));
