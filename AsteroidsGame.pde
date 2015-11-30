@@ -1,5 +1,6 @@
 SpaceShip bob = new SpaceShip();
 Star[] sky = new Star[200];
+
 // Asteroid[] charloot = new Asteroid[10];
 ArrayList <Asteroid> charloot;
 public void setup() 
@@ -85,6 +86,17 @@ public void keyPressed()
     }
   }
  }
+}
+class Bullet
+{
+  Bullet(SpaceShip bob)
+  {
+
+  }
+  public void show()
+  {
+    // ellipse()
+  }
 }
 class Star
 {
