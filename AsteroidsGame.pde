@@ -1,12 +1,13 @@
 SpaceShip bob = new SpaceShip();
 Star[] sky = new Star[200];
-
+ArrayList <Bullet> pew;
 // Asteroid[] charloot = new Asteroid[10];
 ArrayList <Asteroid> charloot;
 public void setup() 
 {
   size(600,600);
   charloot = new ArrayList <Asteroid>();
+  pew = new ArrayList <Bullet>();
   frameRate(60);
   for(int i=0;i<sky.length;i++)
   {
@@ -73,6 +74,13 @@ public void keyPressed()
     bob.setDirectionX(0);
     bob.setDirectionY(0);
   }
+  if(key == ' ')//-------------------------------BULLET-------------------------------------------------
+  {
+    pew.add(new Bullet());
+    // for(int i = 0; i < pew.size(); i++)
+      // pew.get(i).show();
+    System.out.println(pew.size());
+  }
   if (key == 'r')
   {
     bob.setX((int)(Math.random()*600));
@@ -86,6 +94,7 @@ public void keyPressed()
     }
   }
  }
+
 }
 
 class Bullet extends Floater
@@ -105,7 +114,7 @@ class Bullet extends Floater
   }
   public void show()
   {
-    ellipse( (float)myDirectionX, (float)myDirectionY, 10, 10);
+    ellipse((float)myDirectionX, (float)myDirectionY, 10, 10);
   }
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}
@@ -177,7 +186,6 @@ class Asteroid extends Floater
 private float rotSpeed;
 public Asteroid()
     {
-      
       corners = 6;
       int[] xS = {-11,7,13,6,-11,-5};
       int[] yS = {-8,-8,0,10,8,0}; 
@@ -187,9 +195,9 @@ public Asteroid()
       myCenterY = ((Math.random()*600));/*10)+ 580);*/
       myColor = 255;
       myPointDirection = (int)(Math.random()*360); //degrees
-      myDirectionX = 0; //leave at zero
-      myDirectionY = 0;
-      rotSpeed = 5; //what is this
+      myDirectionX = (int)((Math.random()*3)+1); //leave at zero
+      myDirectionY = (int)((Math.random()*3)+1);
+      rotSpeed = (int)((Math.random()*4)+1); //what is this
     }
     public void setX(int x){myCenterX = x;}
     public int getX(){return (int)myCenterX;}
@@ -206,8 +214,8 @@ public Asteroid()
     {
        rotate(rotSpeed);
        super.move();
-       setDirectionX(Math.random());
-       setDirectionY(Math.random());
+       // setDirectionX(Math.random());
+       // setDirectionY(Math.random());
        // setX((int)((Math.random()*10 )+ 580));
        // setY((int)((Math.random()*10 )+ 580)); 
     }
