@@ -21,7 +21,7 @@ public void draw()
   background(0);
   for(int i=0;i<sky.length;i++)
   {
-    sky[i].show();
+    // sky[i].show();
   }
   bob.show();
   bob.move();
@@ -77,10 +77,13 @@ public void keyPressed()
   if(key == ' ')//-------------------------------BULLET-------------------------------------------------
   {
     pew.add(new Bullet());
-    // for(int i = 0; i < pew.size(); i++)
-      // pew.get(i).show();
+    for(int i = 0; i < pew.size(); i++){
+      pew.get(i).show();
+      pew.get(i).show();
+    }
     System.out.println(pew.size());
   }
+    
   if (key == 'r')
   {
     bob.setX((int)(Math.random()*600));
@@ -94,7 +97,6 @@ public void keyPressed()
     }
   }
  }
-
 }
 
 class Bullet extends Floater
@@ -114,8 +116,11 @@ class Bullet extends Floater
   }
   public void show()
   {
-    ellipse((float)myDirectionX, (float)myDirectionY, 10, 10);
+    fill(255);
+    ellipse((float)myCenterX, (float)myCenterY, 10, 10);
+
   }
+
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}
   public void setY(int y){myCenterY = y;}
