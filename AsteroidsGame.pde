@@ -21,7 +21,7 @@ public void draw()
   background(0);
   for(int i=0;i<sky.length;i++)
   {
-    // sky[i].show();
+    sky[i].show();
   }
   bob.show();
   bob.move();
@@ -107,7 +107,7 @@ class Bullet extends Floater
     myCenterX = bob.getX();
     myCenterY = bob.getY();
   }
-  Bullet()
+  public Bullet()
   {
     dRadians = myPointDirection*(Math.PI/180);
     myDirectionX = 5 * Math.cos(dRadians) + bob.getDirectionX();
@@ -149,13 +149,13 @@ class Star
 }
 class SpaceShip extends Floater 
 {   
-  SpaceShip(int x,int y)
+  public SpaceShip(int x,int y)
   {
     myCenterX = x;
     myCenterY = y;
   }
-    SpaceShip()
-    {
+  public SpaceShip()
+  {
       corners = 4;
       int[] xS = {-8,16,-8,-2}; //change
       int[] yS = {-8,0,8,0};  //change
@@ -167,7 +167,7 @@ class SpaceShip extends Floater
       myPointDirection = 270; //degrees
       myDirectionX = 0; //leave at zero
       myDirectionY = 0;
-    }
+  }
     public void setX(int x){myCenterX = x;}
     public int getX(){return (int)myCenterX;}
     public void setY(int y){myCenterY = y;}
