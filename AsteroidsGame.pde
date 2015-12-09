@@ -1,13 +1,15 @@
 SpaceShip bob = new SpaceShip();
+Bullet pew = new Bullet(bob);
 Star[] sky = new Star[200];
-ArrayList <Bullet> pew;
+ArrayList <Bullet> bullet;
 // Asteroid[] charloot = new Asteroid[10];
 ArrayList <Asteroid> charloot;
 public void setup() 
 {
   size(600,600);
+
   charloot = new ArrayList <Asteroid>();
-  pew = new ArrayList <Bullet>();
+  bullet = new ArrayList <Bullet>();
   frameRate(60);
   for(int i=0;i<sky.length;i++)
   {
@@ -76,12 +78,15 @@ public void keyPressed()
   }
   if(key == ' ')//-------------------------------BULLET-------------------------------------------------
   {
-    pew.add(new Bullet());
-    for(int i = 0; i < pew.size(); i++){
-      pew.get(i).show();
-      pew.get(i).show();
+    bullet.add(new Bullet(bob));
+    for(int i = 0; i < bullet.size(); i++){
+      bullet.get(i).show();
+      bullet.get(i).move();
     }
-    System.out.println(pew.size());
+    System.out.println(bullet.size());
+    // bullet.move();
+    // bullet.show();
+
   }
     
   if (key == 'r')
@@ -102,23 +107,19 @@ public void keyPressed()
 class Bullet extends Floater
 {
   private double dRadians;
-  Bullet(SpaceShip bob)
+  Bullet(SpaceShip phteven)
   {
-    myCenterX = bob.getX();
-    myCenterY = bob.getY();
-  }
-  public Bullet()
-  {
+    myCenterX = phteven.getX();
+    myCenterY = phteven.getY();
     dRadians = myPointDirection*(Math.PI/180);
-    myDirectionX = 5 * Math.cos(dRadians) + bob.getDirectionX();
-    myDirectionY = 5 * Math.cos(dRadians) + bob.getDirectionY();
+    myDirectionX = 5 * Math.cos(dRadians) + phteven.getDirectionX();
+    myDirectionY = 5 * Math.sin(dRadians) + phteven.getDirectionY();
     
   }
   public void show()
   {
     fill(255);
-    ellipse((float)myCenterX, (float)myCenterY, 10, 10);
-
+    ellipse((float)myCenterX, (float)myCenterY, 10, 10);  
   }
 
   public void setX(int x){myCenterX = x;}
@@ -200,8 +201,17 @@ public Asteroid()
       myCenterY = ((Math.random()*600));/*10)+ 580);*/
       myColor = 255;
       myPointDirection = (int)(Math.random()*360); //degrees
-      myDirectionX = (int)((Math.random()*3)+1); //leave at zero
-      myDirectionY = (int)((Math.random()*3)+1);
+
+      if(Math.random()<.5)
+         myDirectionX = (int)((Math.random()*2)-3);
+      else
+        myDirectionX = (int)((Math.random()*2)+3);
+
+      if(Math.random()>.5)
+         myDirectionY = (int)((Math.random()*2)-3);
+      else
+        myDirectionY = (int)((Math.random()*2)+3);
+
       rotSpeed = (int)((Math.random()*4)+1); //what is this
     }
     public void setX(int x){myCenterX = x;}
