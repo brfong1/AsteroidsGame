@@ -39,7 +39,16 @@ public void draw()
     charloot.remove(i);
    }
   }
-
+  for(int j = 0; j < charloot.size(); j++)
+   for(int i = 0; i < bullet.size(); i++)
+    {
+      bullet.get(i).show();
+      bullet.get(i).move();
+      if(dist(bullet.get(i).getX(),bullet.get(i).getY(),charloot.get(j).getX(), charloot.get(j).getY()) <= 2)
+        charloot.remove(i);
+      if(bullet.size() >= 10)
+        bullet.remove(0);
+    }
 }
 public void keyPressed()
 {
@@ -79,11 +88,7 @@ public void keyPressed()
   if(key == ' ')//-------------------------------BULLET-------------------------------------------------
   {
     bullet.add(new Bullet(bob));
-    for(int i = 0; i < bullet.size(); i++){
-      bullet.get(i).show();
-      bullet.get(i).move();
-    }
-    System.out.println(bullet.size());
+    
     // bullet.move();
     // bullet.show();
 
@@ -111,6 +116,7 @@ class Bullet extends Floater
   {
     myCenterX = phteven.getX();
     myCenterY = phteven.getY();
+    myPointDirection = phteven.getPointDirection();
     dRadians = myPointDirection*(Math.PI/180);
     myDirectionX = 5 * Math.cos(dRadians) + phteven.getDirectionX();
     myDirectionY = 5 * Math.sin(dRadians) + phteven.getDirectionY();
