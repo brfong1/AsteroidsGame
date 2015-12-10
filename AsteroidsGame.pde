@@ -4,10 +4,10 @@ Star[] sky = new Star[200];
 ArrayList <Bullet> bullet;
 // Asteroid[] charloot = new Asteroid[10];
 ArrayList <Asteroid> charloot;
+boolean lose = false;
 public void setup() 
 {
   size(600,600);
-
   charloot = new ArrayList <Asteroid>();
   bullet = new ArrayList <Bullet>();
   frameRate(60);
@@ -39,14 +39,17 @@ public void draw()
     charloot.remove(i);
    }
   }
+
+ for(int i = 0; i < bullet.size(); i++)
   for(int j = 0; j < charloot.size(); j++)
-   for(int i = 0; i < bullet.size(); i++)
     {
       bullet.get(i).show();
       bullet.get(i).move();
-      if(dist(bullet.get(i).getX(),bullet.get(i).getY(),charloot.get(j).getX(), charloot.get(j).getY()) <= 2)
-        charloot.remove(i);
-      if(bullet.size() >= 10)
+      if(dist(bullet.get(i).getX(), bullet.get(i).getY(), charloot.get(j).getX(), charloot.get(j).getY()) <= 20){
+        charloot.remove(j);
+        // bullet.remove(i); //crashes program
+      }
+      if(bullet.size() >= 5)
         bullet.remove(0);
     }
 }
@@ -58,7 +61,7 @@ public void keyPressed()
     bob.accelerate(0.2);
     // System.out.println("ಠ_ಠ");
   }
-  if( key == 's')
+  if(key == 's')
   {
     bob.accelerate(-0.2);
     // System.out.println("s");
@@ -125,7 +128,7 @@ class Bullet extends Floater
   public void show()
   {
     fill(255);
-    ellipse((float)myCenterX, (float)myCenterY, 10, 10);  
+    ellipse((float)myCenterX, (float)myCenterY, 5, 5);  
   }
 
   public void setX(int x){myCenterX = x;}
