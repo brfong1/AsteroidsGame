@@ -2,12 +2,11 @@ SpaceShip bob = new SpaceShip();
 Bullet pew = new Bullet(bob);
 Star[] sky = new Star[200];
 ArrayList <Bullet> bullet;
-// Asteroid[] charloot = new Asteroid[10];
 ArrayList <Asteroid> charloot;
-boolean lose = false;
+public boolean loser = false;
 public void setup() 
 {
-  size(600,600);
+  size(900,900);
   charloot = new ArrayList <Asteroid>();
   bullet = new ArrayList <Bullet>();
   frameRate(60);
@@ -15,11 +14,16 @@ public void setup()
   {
     sky[i] = new Star();
   }
-  for(int j = 0; j < 10; j++)
+  for(int j = 0; j < 40; j++)
     charloot.add(new Asteroid());
 }
 public void draw() 
 {
+  if(loser == true)
+  {
+    lose();
+  } 
+  else{
   background(0);
   for(int i=0;i<sky.length;i++)
   {
@@ -30,31 +34,65 @@ public void draw()
   // charloot[1].show();
   for(int i = 0; i < charloot.size(); i++)
   {
-   // charloot[i].setX((int)((Math.random()*10 )+ 580));
-   // charloot[i].setY((int)((Math.random()*10 )+ 580));
    charloot.get(i).show();
    charloot.get(i).move();
    if(dist(charloot.get(i).getX(), charloot.get(i).getY(), bob.getX(), bob.getY()) <= 20)
    {
-    charloot.remove(i);
+    // charloot.remove(i);
+    lose();
+    loser = true;
    }
   }
+}
 
- for(int i = 0; i < bullet.size(); i++)
-  for(int j = 0; j < charloot.size(); j++)
-    {
+ for(int i = 0; i < bullet.size(); i++){
       bullet.get(i).show();
       bullet.get(i).move();
+  for(int j = 0; j < charloot.size(); j++)
+    {
+      // if(dist(bullet.get(i).getX(), bullet.get(i).getY(), bob.getX(), bob.getY()) <= 20)
+      //   loser = true;
+
+      // if(dist(bob.getX(), bob.getY(), charloot.get(j).getX(), charloot.get(j).getY()) <= 20)
+      //   loser = true;
+
       if(dist(bullet.get(i).getX(), bullet.get(i).getY(), charloot.get(j).getX(), charloot.get(j).getY()) <= 20){
         charloot.remove(j);
-        // bullet.remove(i); //crashes program
+        bullet.remove(i); //crashes program without break
+        break;
       }
       if(bullet.size() >= 5)
         bullet.remove(0);
     }
+  }
+}
+public void lose()
+{
+   fill(0);
+   stroke(0);
+   rect(0,0,900,900);
+   fill(255);
+   textSize(48);
+   textAlign(CENTER);
+   text("YOU LOSE", 450,400);
 }
 public void keyPressed()
 {
+  if(key == 'l')
+  {
+   charloot = new ArrayList <Asteroid>();
+   bullet = new ArrayList <Bullet>();
+   for(int i=0;i<sky.length;i++)
+    {
+      sky[i] = new Star();
+    }
+  for(int j = 0; j < 40; j++)
+    charloot.add(new Asteroid());
+    loser = false;
+  }
+  if(loser == true)
+    return;
+
   int degRot = 20;  //can change
   if(key == 'w') 
   {
@@ -127,10 +165,15 @@ class Bullet extends Floater
   }
   public void show()
   {
-    fill(255);
+    fill(255,0,0);
+    stroke(255,0,0);
     ellipse((float)myCenterX, (float)myCenterY, 5, 5);  
   }
-
+  public void move()
+  {
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;     
+  }
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}
   public void setY(int y){myCenterY = y;}
@@ -147,8 +190,8 @@ class Star
   private int starX, starY;
   Star()
   {
-    starX = (int)(Math.random()*600);
-    starY = (int)(Math.random()*600);
+    starX = (int)(Math.random()*900);
+    starY = (int)(Math.random()*900);
   }
   void show()
   {
@@ -171,8 +214,8 @@ class SpaceShip extends Floater
       int[] yS = {-8,0,8,0};  //change
       xCorners = xS;
       yCorners = yS;
-      myCenterX = 300;
-      myCenterY = 300;
+      myCenterX = 450;
+      myCenterY = 450;
       myColor = 255;
       myPointDirection = 270; //degrees
       myDirectionX = 0; //leave at zero
@@ -212,14 +255,14 @@ public Asteroid()
       myPointDirection = (int)(Math.random()*360); //degrees
 
       if(Math.random()<.5)
-         myDirectionX = (int)((Math.random()*2)-3);
+         myDirectionX = (int)((Math.random()*1)-2);
       else
-        myDirectionX = (int)((Math.random()*2)+3);
+        myDirectionX = (int)((Math.random()*1)+2);
 
       if(Math.random()>.5)
-         myDirectionY = (int)((Math.random()*2)-3);
+         myDirectionY = (int)((Math.random()*1)-2);
       else
-        myDirectionY = (int)((Math.random()*2)+3);
+        myDirectionY = (int)((Math.random()*1)+2);
 
       rotSpeed = (int)((Math.random()*4)+1); //what is this
     }
@@ -242,6 +285,28 @@ public Asteroid()
        // setDirectionY(Math.random());
        // setX((int)((Math.random()*10 )+ 580));
        // setY((int)((Math.random()*10 )+ 580)); 
+    }
+    public void show()
+    {
+      // fill(myColor);  
+    fill(255); 
+    stroke(myColor);    
+    //convert degrees to radians for sin and cos         
+    double dRadians = myPointDirection*(Math.PI/180);                 
+    int xRotatedTranslated, yRotatedTranslated;    
+    beginShape();         
+    for(int nI = 0; nI < corners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE);  
+    // if(keyPressed == TRUE && key == 'w')
+    // {
+      
+    // }
     }
 
 }
