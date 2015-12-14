@@ -4,6 +4,7 @@ Star[] sky = new Star[200];
 ArrayList <Bullet> bullet;
 ArrayList <Asteroid> charloot;
 public boolean loser = false;
+public int asteroids = 30;
 public void setup() 
 {
   size(900,900);
@@ -14,11 +15,11 @@ public void setup()
   {
     sky[i] = new Star();
   }
-  for(int j = 0; j < 40; j++)
+  for(int j = 0; j < asteroids; j++)
     charloot.add(new Asteroid());
 }
 public void draw() 
-{
+{ 
   if(loser == true)
   {
     lose();
@@ -38,10 +39,12 @@ public void draw()
    charloot.get(i).move();
    if(dist(charloot.get(i).getX(), charloot.get(i).getY(), bob.getX(), bob.getY()) <= 20)
    {
-    // charloot.remove(i);
     lose();
     loser = true;
    }
+   System.out.println(charloot.size());
+   if(charloot.size() == 1)
+    win();
   }
 }
 
@@ -75,6 +78,20 @@ public void lose()
    textSize(48);
    textAlign(CENTER);
    text("YOU LOSE", 450,400);
+   textSize(28);
+   text("Press L to restart", 450, 500);
+}
+public void win()
+{
+   fill(0);
+   stroke(0);
+   rect(0,0,900,900);
+   fill(255);
+   textSize(48);
+   textAlign(CENTER);
+   text("YOU WIN", 450,400);
+   textSize(28);
+   text("Press L to restart", 450, 500);
 }
 public void keyPressed()
 {
@@ -86,7 +103,7 @@ public void keyPressed()
     {
       sky[i] = new Star();
     }
-  for(int j = 0; j < 40; j++)
+  for(int j = 0; j < asteroids; j++)
     charloot.add(new Asteroid());
     loser = false;
   }
@@ -119,6 +136,7 @@ public void keyPressed()
       bob.setDirectionX(0);
       bob.setDirectionY(0);
   }
+
   if (key == 'f')
   {
     bob.setX((int)(Math.random()*600));
