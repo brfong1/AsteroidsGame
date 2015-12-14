@@ -42,7 +42,7 @@ public void draw()
     lose();
     loser = true;
    }
-   System.out.println(charloot.size());
+   // System.out.println(charloot.size());
    if(charloot.size() == 1)
     win();
   }
@@ -147,10 +147,6 @@ public void keyPressed()
   if(key == ' ')//-------------------------------BULLET-------------------------------------------------
   {
     bullet.add(new Bullet(bob));
-    
-    // bullet.move();
-    // bullet.show();
-
   }
     
   if (key == 'r')
@@ -179,7 +175,6 @@ class Bullet extends Floater
     dRadians = myPointDirection*(Math.PI/180);
     myDirectionX = 5 * Math.cos(dRadians) + phteven.getDirectionX();
     myDirectionY = 5 * Math.sin(dRadians) + phteven.getDirectionY();
-    
   }
   public void show()
   {
