@@ -7,7 +7,7 @@ public boolean loser = false;
 public int asteroids = 30;
 public void setup() 
 {
-  size(900,900);
+  size(700,700);
   charloot = new ArrayList <Asteroid>();
   bullet = new ArrayList <Bullet>();
   frameRate(60);
@@ -46,6 +46,8 @@ public void draw()
    if(charloot.size() == 1)
     win();
   }
+  stroke(255);
+  text("Asteroids Left: "+ charloot.size(), 10, 880);
 }
 
  for(int i = 0; i < bullet.size(); i++){
@@ -77,9 +79,9 @@ public void lose()
    fill(255);
    textSize(48);
    textAlign(CENTER);
-   text("YOU LOSE", 450,400);
+   text("YOU LOSE", 350,300);
    textSize(28);
-   text("Press L to restart", 450, 500);
+   text("Press L to restart", 350, 400);
 }
 public void win()
 {
@@ -89,9 +91,9 @@ public void win()
    fill(255);
    textSize(48);
    textAlign(CENTER);
-   text("YOU WIN", 450,400);
+   text("YOU WIN", 350,300);
    textSize(28);
-   text("Press L to restart", 450, 500);
+   text("Press L to restart", 350, 400);
 }
 public void keyPressed()
 {
@@ -227,8 +229,8 @@ class SpaceShip extends Floater
       int[] yS = {-8,0,8,0};  //change
       xCorners = xS;
       yCorners = yS;
-      myCenterX = 450;
-      myCenterY = 450;
+      myCenterX = 350;
+      myCenterY = 350;
       myColor = 255;
       myPointDirection = 270; //degrees
       myDirectionX = 0; //leave at zero
@@ -262,8 +264,11 @@ public Asteroid()
       int[] yS = {-8,-8,0,10,8,0}; 
       xCorners = xS;
       yCorners = yS;
-      myCenterX = ((Math.random()*600));/*10)+ 580); */
-      myCenterY = ((Math.random()*600));/*10)+ 580);*/
+      //myCenterX = ((Math.random()*600));/*10)+ 580); */
+      //myCenterY = ((Math.random()*600));/*10)+ 580);*/
+      myCenterX = ((Math.random()*580)+ 10);
+      myCenterY = ((Math.random()*580)+10);
+
       myColor = 255;
       myPointDirection = (int)(Math.random()*360); //degrees
 
